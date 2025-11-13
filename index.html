@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fractal Story Tree</title>
+    <title>Fractal Story Tree – Local LLM</title>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -19,15 +15,9 @@
             padding: 1.5rem;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+        .header { text-align: center; margin-bottom: 2rem; }
 
         .header-title {
             display: flex;
@@ -69,9 +59,7 @@
             margin: 0 auto;
         }
 
-        .info-toggle:hover {
-            color: #5b21b6;
-        }
+        .info-toggle:hover { color: #5b21b6; }
 
         .structure-info {
             background: white;
@@ -89,9 +77,7 @@
         }
 
         @media (min-width: 768px) {
-            .structure-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .structure-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         .structure-card {
@@ -120,17 +106,9 @@
             margin-bottom: 0.5rem;
         }
 
-        .structure-card.inicio h4 {
-            color: #1e40af;
-        }
-
-        .structure-card.nudo h4 {
-            color: #ea580c;
-        }
-
-        .structure-card.desenlace h4 {
-            color: #16a34a;
-        }
+        .structure-card.inicio h4 { color: #1e40af; }
+        .structure-card.nudo h4 { color: #ea580c; }
+        .structure-card.desenlace h4 { color: #16a34a; }
 
         .structure-fractal {
             background: #f9fafb;
@@ -145,9 +123,7 @@
             padding: 2rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
 
         .form-label {
             display: block;
@@ -157,7 +133,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .form-select, .form-textarea, .form-input {
+        .form-select, .form-textarea {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #d1d5db;
@@ -165,7 +141,7 @@
             font-size: 1rem;
         }
 
-        .form-select:focus, .form-textarea:focus, .form-input:focus {
+        .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: transparent;
             box-shadow: 0 0 0 2px #7c3aed;
@@ -188,13 +164,14 @@
             transition: background-color 0.2s;
         }
 
-        .start-button:hover:not(:disabled) {
-            background: #5b21b6;
-        }
+        .start-button:hover:not(:disabled) { background: #5b21b6; }
+        .start-button:disabled { background: #9ca3af; cursor: not-allowed; }
 
-        .start-button:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
+        .model-status {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
         }
 
         .story-header {
@@ -220,9 +197,7 @@
             transition: background-color 0.2s;
         }
 
-        .reset-button:hover {
-            background: #374151;
-        }
+        .reset-button:hover { background: #374151; }
 
         .story-container {
             background: white;
@@ -231,9 +206,7 @@
             padding: 1.5rem;
         }
 
-        .story-node {
-            margin-bottom: 0.75rem;
-        }
+        .story-node { margin-bottom: 0.75rem; }
 
         .node-content {
             display: flex;
@@ -249,36 +222,28 @@
             border-left-color: #9ca3af;
         }
 
-        .node-content.premise:hover {
-            background: #f3f4f6;
-        }
+        .node-content.premise:hover { background: #f3f4f6; }
 
         .node-content.inicio {
             background: #dbeafe;
             border-left-color: #3b82f6;
         }
 
-        .node-content.inicio:hover {
-            background: #bfdbfe;
-        }
+        .node-content.inicio:hover { background: #bfdbfe; }
 
         .node-content.nudo {
             background: #fed7aa;
             border-left-color: #f97316;
         }
 
-        .node-content.nudo:hover {
-            background: #fdba74;
-        }
+        .node-content.nudo:hover { background: #fdba74; }
 
         .node-content.desenlace {
             background: #dcfce7;
             border-left-color: #22c55e;
         }
 
-        .node-content.desenlace:hover {
-            background: #bbf7d0;
-        }
+        .node-content.desenlace:hover { background: #bbf7d0; }
 
         .node-toggle {
             margin-right: 0.75rem;
@@ -290,17 +255,11 @@
             transition: background-color 0.2s;
         }
 
-        .node-toggle:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
+        .node-toggle:hover { background: rgba(255, 255, 255, 0.5); }
 
-        .node-details {
-            flex: 1;
-        }
+        .node-details { flex: 1; }
 
-        .beat-label {
-            margin-bottom: 0.5rem;
-        }
+        .beat-label { margin-bottom: 0.5rem; }
 
         .beat-badge {
             display: inline-block;
@@ -366,40 +325,15 @@
             transition: all 0.2s;
         }
 
-        .expand-button {
-            color: #2563eb;
-            background: none;
-        }
+        .expand-button { color: #2563eb; background: none; }
+        .expand-button:hover { color: #1d4ed8; background: #dbeafe; }
 
-        .expand-button:hover {
-            color: #1d4ed8;
-            background: #dbeafe;
-        }
+        .regenerate-button { color: #ea580c; background: none; }
+        .regenerate-button:hover:not(:disabled) { color: #c2410c; background: #fed7aa; }
 
-        .regenerate-button {
-            color: #ea580c;
-            background: none;
-        }
-
-        .regenerate-button:hover:not(:disabled) {
-            color: #c2410c;
-            background: #fed7aa;
-        }
-
-        .copy-button {
-            color: #059669;
-            background: none;
-        }
-
-        .copy-button:hover:not(:disabled) {
-            color: #047857;
-            background: #d1fae5;
-        }
-
-        .copy-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+        .copy-button { color: #059669; background: none; }
+        .copy-button:hover:not(:disabled) { color: #047857; background: #d1fae5; }
+        .copy-button:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .copy-all-section {
             text-align: center;
@@ -433,10 +367,7 @@
             box-shadow: none;
         }
 
-        .node-children {
-            margin-left: 1.5rem;
-            margin-top: 0.75rem;
-        }
+        .node-children { margin-left: 1.5rem; margin-top: 0.75rem; }
 
         .story-legend {
             text-align: center;
@@ -445,33 +376,19 @@
             margin-top: 1.5rem;
         }
 
-        .story-legend p {
-            margin-bottom: 0.25rem;
-        }
+        .story-legend p { margin-bottom: 0.25rem; }
 
-        .icon {
-            width: 1rem;
-            height: 1rem;
-            margin-right: 0.25rem;
-        }
+        .icon { width: 1rem; height: 1rem; margin-right: 0.25rem; }
+        .icon-large { width: 2rem; height: 2rem; }
 
-        .icon-large {
-            width: 2rem;
-            height: 2rem;
-        }
-
-        .spinner {
-            animation: spin 1s linear infinite;
-        }
+        .spinner { animation: spin 1s linear infinite; }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -479,12 +396,13 @@
         <div class="header">
             <div class="header-title">
                 <span style="font-size: 2rem; color: #7c3aed;">📚</span>
-                <h1>Fractal Story Tree</h1>
-                <span class="header-badge">Inicio • Nudo • Desenlace</span>
+                <h1>Fractal Story Tree (Local LLM)</h1>
+                <span class="header-badge">Sin API • Sin servidor</span>
             </div>
             <p class="header-description">
-                Create stories using the fractal <strong>Inicio-Nudo-Desenlace</strong> structure. 
-                Each sentence expands into its own beginning, conflict, and resolution - then each of those can expand infinitely.
+                Crea historias usando la estructura fractal <strong>Inicio-Nudo-Desenlace</strong>. 
+                Cada frase se expande en su propio comienzo, conflicto y desenlace, y cada una de esas secciones puede expandirse de nuevo.
+                Todo se ejecuta en tu navegador con un modelo local (WebLLM).
             </p>
             <button class="info-toggle" onclick="toggleStructureInfo()">
                 <span style="width: 1rem; height: 1rem; margin-right: 0.25rem; display: inline-block;">ℹ️</span>
@@ -528,20 +446,6 @@
         </div>
 
         <div id="start-form" class="start-form">
-            <!-- NUEVO: API key de OpenRouter -->
-            <div class="form-group">
-                <label class="form-label">OpenRouter API key (se usa la tuya, no la del autor):</label>
-                <input 
-                    id="openrouter-key" 
-                    class="form-input" 
-                    type="password" 
-                    placeholder="sk-or-v1-..."
-                />
-                <p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">
-                    La clave se usa solo desde tu navegador contra OpenRouter. El autor de la página no paga las llamadas ni ve tu clave.
-                </p>
-            </div>
-
             <div class="form-group">
                 <label class="form-label">Choose a genre (optional):</label>
                 <select id="genre-select" class="form-select">
@@ -566,6 +470,10 @@
                     placeholder="Un jardinero terrible gana el concurso de Chelsea por coincidencia"
                 ></textarea>
             </div>
+
+            <p id="model-status" class="model-status">
+                ⏳ Loading local model in your browser (first time can be slow)...
+            </p>
             
             <button id="start-button" class="start-button" onclick="startNewStory()">
                 Start Fractal Story Tree
@@ -602,10 +510,16 @@
         </div>
     </div>
 
-    <script>
+    <!-- IMPORTANTE: script como módulo para poder usar import/await -->
+    <script type="module">
+        import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+
         let storyData = null;
         let expandingNodes = new Set();
         let regeneratingNodes = new Set();
+
+        let engine = null;
+        let engineReady = false;
 
         const narrativeBeats = {
             0: { label: "INICIO", description: "¿Cómo comienza? Situación inicial, presentación", color: "inicio" },
@@ -625,22 +539,75 @@
                 toggleText.textContent = 'Show Fractal Structure';
             }
         }
+        window.toggleStructureInfo = toggleStructureInfo;
 
         function updateStartButton() {
             const input = document.getElementById('story-input');
             const button = document.getElementById('start-button');
-            button.disabled = !input.value.trim();
+            button.disabled = !input.value.trim() || !engineReady;
         }
 
         document.getElementById('story-input').addEventListener('input', updateStartButton);
-        updateStartButton();
 
-        function getOpenRouterApiKey() {
-            const key = document.getElementById('openrouter-key').value.trim();
-            if (!key) {
-                throw new Error("Please enter your OpenRouter API key.");
+        function setModelStatus(text) {
+            const el = document.getElementById('model-status');
+            if (el) el.textContent = text;
+        }
+
+        async function initEngine() {
+            try {
+                const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC"; // puedes cambiar por uno más pequeño si quieres
+                const initProgressCallback = (progress) => {
+                    if (progress && typeof progress.text === "string") {
+                        setModelStatus(`⏳ ${progress.text}`);
+                    } else if (progress && typeof progress.progress === "number") {
+                        const pct = Math.round(progress.progress * 100);
+                        setModelStatus(`⏳ Loading model... ${pct}%`);
+                    }
+                };
+
+                engine = await webllm.CreateMLCEngine(
+                    selectedModel,
+                    { initProgressCallback }
+                );
+                engineReady = true;
+                setModelStatus("✅ Model loaded. You can start writing.");
+            } catch (err) {
+                console.error("Error loading WebLLM model:", err);
+                setModelStatus("❌ Error loading model. Check WebGPU support and reload.");
+            } finally {
+                updateStartButton();
             }
-            return key;
+        }
+
+        // Lanzamos carga del modelo
+        initEngine();
+
+        async function callLocalModel(prompt) {
+            if (!engineReady || !engine) {
+                throw new Error("Model is still loading. Wait until the status is green.");
+            }
+
+            const messages = [
+                {
+                    role: "system",
+                    content: "You are a helpful Spanish/English literary assistant. You always respond ONLY with valid JSON according to the user's schema, with no extra commentary."
+                },
+                { role: "user", content: prompt }
+            ];
+
+            const reply = await engine.chat.completions.create({
+                messages,
+                temperature: 0.7
+            });
+
+            let responseText = reply.choices?.[0]?.message?.content ?? "";
+            responseText = responseText
+                .replace(/```json\n?/gi, "")
+                .replace(/```\n?/gi, "")
+                .trim();
+
+            return responseText;
         }
 
         async function startNewStory() {
@@ -648,12 +615,8 @@
             const genre = document.getElementById('genre-select').value;
             
             if (!input.value.trim()) return;
-
-            try {
-                // Forzamos a que haya API key antes de empezar
-                getOpenRouterApiKey();
-            } catch (e) {
-                alert("Introduce tu API key de OpenRouter antes de empezar.");
+            if (!engineReady) {
+                alert("The model is still loading. Wait until the status shows as loaded.");
                 return;
             }
 
@@ -669,11 +632,15 @@
             storyData = rootNode;
             showStorySection();
             
-            // Show loading state
-            document.getElementById('story-tree').innerHTML = '<div style="text-align: center; padding: 2rem;"><span style="font-size: 2rem; color: #7c3aed;">⏳</span><p style="margin-top: 1rem; color: #6b7280;">Expanding your story...</p></div>';
+            document.getElementById('story-tree').innerHTML =
+                '<div style="text-align: center; padding: 2rem;">' +
+                '<span style="font-size: 2rem; color: #7c3aed;">⏳</span>' +
+                '<p style="margin-top: 1rem; color: #6b7280;">Expanding your story...</p>' +
+                '</div>';
             
             await expandSentence(rootNode);
         }
+        window.startNewStory = startNewStory;
 
         function showStorySection() {
             document.getElementById('start-form').classList.add('hidden');
@@ -690,51 +657,7 @@
             document.getElementById('story-input').value = '';
             updateStartButton();
         }
-
-        async function callOpenRouter(prompt) {
-            const apiKey = getOpenRouterApiKey();
-
-            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${apiKey}`,
-                    // Opcionales pero recomendados:
-                    // "HTTP-Referer": "https://TU-USUARIO.github.io/fractal-story-tree/",
-                    // "X-Title": "Fractal Story Tree"
-                },
-                body: JSON.stringify({
-                    model: "meta-llama/llama-3-8b-instruct", // cámbialo si quieres otro modelo
-                    messages: [
-                        {
-                            role: "user",
-                            content: prompt
-                        }
-                    ],
-                    temperature: 0.7
-                })
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`OpenRouter error ${response.status}: ${errorText}`);
-            }
-
-            const data = await response.json();
-            let responseText = data.choices?.[0]?.message?.content;
-
-            if (!responseText) {
-                throw new Error("No content returned from model.");
-            }
-
-            // Quitar posibles ```json ``` envoltorios
-            responseText = responseText
-                .replace(/```json\n?/gi, "")
-                .replace(/```\n?/gi, "")
-                .trim();
-
-            return responseText;
-        }
+        window.resetStory = resetStory;
 
         async function expandSentence(node) {
             const nodeId = node.id;
@@ -761,12 +684,6 @@ Each sentence should:
 - Be a complete, detailed sentence that could be expanded further
 - Maintain the same tense and style as the original
 
-Example:
-Original: "Un jardinero terrible gana el concurso de Chelsea por coincidencia"
-1. INICIO: "Un jardinero de Pimlico que solo sabe mantener vivas las malas hierbas se estrella con su Morris Minor cerca del lugar del concurso"
-2. NUDO: "El público piensa que es un jardín conceptual y recibe una mención especial"  
-3. DESENLACE: "El jardinero tiene que fingir ser un experto cuando lo entrevistan los periodistas"
-
 Respond ONLY with a JSON object in this exact format:
 {
   "expansions": [
@@ -778,7 +695,7 @@ Respond ONLY with a JSON object in this exact format:
 
 DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON.`;
 
-                const responseText = await callOpenRouter(prompt);
+                const responseText = await callLocalModel(prompt);
                 const result = JSON.parse(responseText);
                 
                 if (!result.expansions || !Array.isArray(result.expansions) || result.expansions.length !== 3) {
@@ -816,11 +733,277 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON.`;
             try {
                 const genre = document.getElementById('genre-select').value;
                 const genreInstruction = genre === 'any' ? '' : `in the ${genre} genre `;
-
                 const beat = narrativeBeats[node.beatIndex];
 
                 const prompt = `You are regenerating one sentence in a fractal INICIO-NUDO-DESENLACE story structure.
 
 Parent sentence: "${node.parent.text}"
 
-You previously generated 3 expansions (INICIO, NUDO, DESENLACE) for this sentence. Now regenerate ONLY the ${beat.l
+You previously generated 3 expansions (INICIO, NUDO, DESENLACE) for this sentence. Now regenerate ONLY the ${beat.label} sentence with a completely different approach.
+
+The ${beat.label} should: ${beat.description}
+
+Create a single sentence ${genreInstruction}that:
+- Is completely different from the previous version
+- Still serves the ${beat.label} function perfectly
+- Continues naturally from the parent sentence
+- Maintains the same tense and style
+- Could be expanded further into its own INICIO-NUDO-DESENLACE
+
+Respond ONLY with a JSON object in this exact format:
+{
+  "regenerated": "Your new sentence here"
+}
+
+DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON.`;
+
+                const responseText = await callLocalModel(prompt);
+                const result = JSON.parse(responseText);
+                
+                node.text = result.regenerated;
+                node.children = [];
+                node.isExpanded = false;
+
+            } catch (error) {
+                console.error("Error regenerating sentence:", error);
+                alert("Failed to regenerate the sentence. Please try again. " + error.message);
+            } finally {
+                regeneratingNodes.delete(nodeId);
+                renderStoryTree();
+            }
+        }
+
+        async function toggleNodeInternal(node) {
+            if (!node) return;
+            
+            if (node.children.length === 0) {
+                await expandSentence(node);
+            } else {
+                node.isExpanded = !node.isExpanded;
+                renderStoryTree();
+            }
+        }
+
+        window.toggleNode = async function(nodeId) {
+            const node = findNodeById(nodeId);
+            if (node) {
+                await toggleNodeInternal(node);
+            }
+        };
+
+        window.regenerateNode = async function(nodeId) {
+            const node = findNodeById(nodeId);
+            if (node) {
+                await regenerateSentence(node);
+            }
+        };
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                return new Promise((resolve, reject) => {
+                    document.execCommand('copy') ? resolve() : reject();
+                    textArea.remove();
+                });
+            }
+        }
+
+        window.copyNode = function(nodeId) {
+            const node = findNodeById(nodeId);
+            if (!node) return;
+            
+            copyToClipboard(node.text)
+                .then(() => {
+                    showCopyFeedback(nodeId, 'Copied!');
+                })
+                .catch(() => {
+                    showCopyFeedback(nodeId, 'Copy failed');
+                });
+        };
+
+        function showCopyFeedback(nodeId, message) {
+            const button = document.querySelector(`button[onclick="copyNode('${nodeId}')"]`);
+            if (button) {
+                const originalText = button.innerHTML;
+                button.innerHTML = `<span class="icon">✅</span>${message}`;
+                button.disabled = true;
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 1500);
+            }
+        }
+
+        function collectStoryText(node, depth = 0) {
+            let text = '';
+            const indent = '  '.repeat(depth);
+            
+            if (node.beatIndex !== null) {
+                const beat = narrativeBeats[node.beatIndex];
+                text += `${indent}[${beat.label}] `;
+            } else if (depth === 0) {
+                text += `${indent}[PREMISE] `;
+            }
+            
+            text += `${node.text}\n`;
+            
+            if (node.isExpanded && node.children.length > 0) {
+                for (const child of node.children) {
+                    text += collectStoryText(child, depth + 1);
+                }
+            }
+            
+            return text;
+        }
+
+        window.copyAllStory = function() {
+            if (!storyData) return;
+            
+            const fullStory = collectStoryText(storyData);
+            const storyHeader = `Fractal Story Tree - Generated Story\n${'='.repeat(50)}\n\n`;
+            const finalText = storyHeader + fullStory;
+            
+            copyToClipboard(finalText)
+                .then(() => {
+                    showGlobalCopyFeedback('Story copied to clipboard!');
+                })
+                .catch(() => {
+                    showGlobalCopyFeedback('Copy failed');
+                });
+        };
+
+        function showGlobalCopyFeedback(message) {
+            const button = document.getElementById('copy-all-button');
+            if (button) {
+                const originalText = button.innerHTML;
+                button.innerHTML = `<span class="icon">✅</span>${message}`;
+                button.disabled = true;
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 2000);
+            }
+        }
+
+        function renderNode(node, depth = 0) {
+            const isExpanding = expandingNodes.has(node.id);
+            const isRegenerating = regeneratingNodes.has(node.id);
+            const hasChildren = node.children.length > 0;
+            const canExpand = true;
+            const canRegenerate = node.parent !== null;
+            const currentBeat = node.beatIndex !== null ? narrativeBeats[node.beatIndex] : null;
+
+            let beatClass = 'premise';
+            let beatLabel = 'PREMISE';
+            let beatDescription = 'Your initial story idea - ready to expand into Inicio-Nudo-Desenlace';
+
+            if (currentBeat) {
+                beatClass = currentBeat.color;
+                beatLabel = currentBeat.label;
+                beatDescription = currentBeat.description;
+            }
+
+            const nodeHtml = `
+                <div class="story-node">
+                    <div class="node-content ${beatClass}">
+                        <button class="node-toggle" onclick="toggleNode('${node.id}')" ${!canExpand ? 'style="visibility: hidden;"' : ''}>
+                            ${isExpanding ? 
+                                '<span class="icon">⏳</span>' : 
+                                (node.isExpanded && hasChildren ? 
+                                    '<span class="icon">▼</span>' : 
+                                    '<span class="icon">▶</span>'
+                                )
+                            }
+                        </button>
+                        <div class="node-details">
+                            <div class="beat-label">
+                                <span class="beat-badge ${beatClass}">${beatLabel}</span>
+                                <p class="beat-description">${beatDescription}</p>
+                            </div>
+                            <p class="node-text ${depth === 0 ? 'root' : ''}">${node.text}</p>
+                            
+                            <div class="node-actions">
+                                ${canExpand && !hasChildren && !isExpanding ? `
+                                    <button class="node-button expand-button" onclick="toggleNode('${node.id}')">
+                                        <span class="icon">➕</span>
+                                        Expand
+                                    </button>
+                                ` : ''}
+                                ${canRegenerate ? `
+                                    <button class="node-button regenerate-button" onclick="regenerateNode('${node.id}')" ${isRegenerating ? 'disabled' : ''}>
+                                        ${isRegenerating ? 
+                                            '<span class="icon">⏳</span>Regenerating...' : 
+                                            '<span class="icon">🔄</span>Regenerate'
+                                        }
+                                    </button>
+                                ` : ''}
+                                <button class="node-button copy-button" onclick="copyNode('${node.id}')">
+                                    <span class="icon">📋</span>
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${node.isExpanded && hasChildren ? `
+                        <div class="node-children">
+                            ${node.children.map(child => renderNode(child, depth + 1)).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            return nodeHtml;
+        }
+
+        function findNodeById(id) {
+            function searchNode(node) {
+                if (node.id === id) return node;
+                for (let child of node.children) {
+                    const found = searchNode(child);
+                    if (found) return found;
+                }
+                return null;
+            }
+            return searchNode(storyData);
+        }
+
+        function renderStoryTree() {
+            if (!storyData) return;
+            
+            const treeContainer = document.getElementById('story-tree');
+            if (!treeContainer) return;
+            
+            treeContainer.innerHTML = renderNode(storyData);
+            
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }, 100);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                setTimeout(() => {
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                }, 1000);
+            }
+            updateStartButton();
+        });
+    </script>
+</body>
+</html>
